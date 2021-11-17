@@ -1,7 +1,7 @@
 {
-  "name": "express",
+  "name": "twitter",
   "version": "1.0.0",
-  "description": "",
+  "description": "twitter clone coding",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -9,7 +9,7 @@
     "start": "nodemon app"
   },
   "keywords": [],
-  "author": "",
+  "author": "Liam",
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.6",
