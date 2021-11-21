@@ -1,4 +1,4 @@
-import e from "express";
+import express from "express";
 import * as tweetRepository from "../data/tweet.js";
 
 export async function getTweets(req, res) {
