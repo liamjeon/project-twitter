@@ -8,7 +8,7 @@ const router = express.Router();
 // GET /tweets
 // GET /tweets?username=:username
 //경로로 들어오면 함수를 연결. 주의! 함수 호출이 아님
-router.get("/", tweetController.getTweets); 
+router.get("/", tweetController.getTweets);  
 
 // GET /tweets/:id
 router.get("/:id", tweetController.getTweet);
