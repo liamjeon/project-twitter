@@ -7,6 +7,8 @@ import { validate } from "../middleware/validator.js";
 
 const router = express.Router();
 
+//validation 쓰는 이유 : 서버에서 접근해서 읽고 쓰기전에 
+//미리 유효성 검사를하여 시간과 비용을 절약함. 
 const validateTweet = [
     body("text")
         .trim()
