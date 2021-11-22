@@ -1,17 +1,7 @@
-import mysql from "mysql2";
-import SQ from 'sequelize';
+import SQ from 'sequelize'; //sequelize에서 mysql를 import함
 
 export const sequelize = new SQ.Sequelize("twitter", "root", "roejddl1", {
   host: "localhost",
-  dialect: 'mysql',
+  dialect: 'mysql', //default
 });
 
-const pool = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  database: "twitter",
-  password: "roejddl1",
-}); //mysql 관리하는 애
-
-
-export const db = pool.promise(); 

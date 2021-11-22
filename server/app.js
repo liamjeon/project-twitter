@@ -29,9 +29,8 @@ app.use((error, req, res, next) => {
 });
 
 
-sequelize.sync().then((client)=>{
-  // console.log(client);
-})
-const server = app.listen(8080);
-//sql 연결
-initSocket(server);
+sequelize.sync().then(()=>{
+  const server = app.listen(8080);
+  initSocket(server);
+  logging: false; //데이터베이스 실행에 대한 로그 안남김
+});
