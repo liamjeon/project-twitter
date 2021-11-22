@@ -30,7 +30,7 @@ app.use((error, req, res, next) => {
 
 
 sequelize.sync().then((client)=>{
-  console.log(client);
+  // console.log(client);
 })
 const server = app.listen(8080);
 //sql 연결

@@ -1,4 +1,37 @@
-import { db } from "../db/database.js";
+import SQ from "sequelize";
+import { db, sequelize } from "../db/database.js";
+const DataTypes = SQ.DataTypes;
+
+const User = sequelize.define(
+  "user",
+  {
+    //define으로 연결,
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
+    },
+    username: {
+      type: DataTypes.STRING(128),
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING(128),
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.STRING(128),
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING(128),
+      allowNull: false,
+    },
+    url: DataTypes.TEXT, //
+  },
+  { timestamps: false } //기본 옵션인 createAt, updateAt을 생성하지 않도록함
+);
 
 export async function findByUsername(username) {
   return db
