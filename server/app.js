@@ -27,7 +27,7 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-db.getConnection().then(connection=>console.log(connection));
 
 const server = app.listen(8080);
+//sql 연결
 initSocket(server);

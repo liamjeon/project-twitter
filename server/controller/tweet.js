@@ -1,6 +1,6 @@
 import express from "express";
-import * as tweetRepository from '../data/tweet.js';
 import { getSocketIO } from '../connection/socket.js';
+import * as tweetRepository from "../data/tweet.js";
 
 export async function getTweets(req, res) {
   const username = req.query.username;
