@@ -7,4 +7,5 @@ const pool = mysql.createPool({
   password: "roejddl1",
 }); //mysql 관리하는 애
 
-export const db = pool.promise();
+
+export const db = pool.promise(); 
