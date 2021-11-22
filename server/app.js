@@ -6,7 +6,8 @@ import helmet from 'helmet';
 import tweetsRouter from './router/tweets.js';
 import authRouter from './router/auth.js';
 import {initSocket} from './connection/socket.js'
-import {db} from './db/database.js'
+// import {db} from './db/database.js'
+import {sequelize} from './db/database.js'
 
 const app = express();
 
@@ -28,6 +29,9 @@ app.use((error, req, res, next) => {
 });
 
 
+sequelize.sync().then((client)=>{
+  console.log(client);
+})
 const server = app.listen(8080);
 //sql 연결
 initSocket(server);
