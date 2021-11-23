@@ -1,18 +1,10 @@
 import Mongoose from "mongoose";
 
 const url =
-  "mongodb+srv://twitter:5ZVNTSBMWEIN1Tlk@cluster0.rqae8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  "mongodb+srv://twitter:9uRPydSaahjBap8I@cluster0.rqae8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 export async function connectDB() {
   return Mongoose.connect(url);
-}
-
-//TODO(Liam): Delete blow
-let db; //client에게서 받은 db를 database 안에서만 사용할 수 있는 변수
-
-//트윗에 대한 collection 전달
-export function getTweets() {
-  return db.collection("tweets");
 }
 
 //_id<database> --> id<server>로 변환
@@ -24,5 +16,13 @@ export function useVirtualId(schema) {
   });
   //JSON으로 변환할 때 가상요소들도 포함될 수 있도록 함.
   schema.set("toJSON", { virtuals: true });
-  schema.set("toObject", { virtuals: true }); //console.log에도 출력할 때 보고싶어서 Obejct에도 포함되도록 함
+  schema.set("toOject", { virtuals: true }); //console.log에도 출력할 때 보고싶어서 Obejct에도 포함되도록 함
+}
+
+//TODO(Liam): Delete blow
+let db; //client에게서 받은 db를 database 안에서만 사용할 수 있는 변수
+
+//트윗에 대한 collection 전달
+export function getTweets() {
+  return db.collection("tweets");
 }

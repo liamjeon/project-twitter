@@ -6,7 +6,6 @@ import helmet from "helmet";
 import tweetsRouter from "./router/tweets.js";
 import authRouter from "./router/auth.js";
 import { initSocket } from "./connection/socket.js";
-import { db } from "./db/database.js";
 import { connectDB } from "./database/database.js";
 
 const app = express();
