@@ -1,28 +1,34 @@
-import { getUsers } from "../database/database.js";
-import MongoDb from "mongodb";
+import { useVirtualId } from "../database/database.js";
+import Mongoose from "mongoose";
+
+//ODM인 Mongoose에서는 스키마를 사용할 수 있다.
+const userSchema = new Mongoose.Schema({
+  username: { type: String, required: true },
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  url: String,
+});
+
+useVirtualId(userSchema); //가상의 id 추가
+const User = Mongoose.model("User", userSchema); //User collection과 schema를 연결해줌
 
 export async function findByUsername(username) {
-  return getUsers()
-    .findOne({ username })
-    .then(mapOptionalUser);
+  const result = User.findOne({ username });
+  console.log(result);
+  return result;
 }
 
-const ObjectId = MongoDb.ObjectId;
 export async function findById(id) {
-  return getUsers()
-    .findOne({ _id: new ObjectId(id) }) //mongodb의 _id는 obejctId형식이기 때문에 Objectid로 싸서 찾아줘야함
-    .then((data) => {
-      return mapOptionalUser(data);
-    });
+  return User.findById({ id });
 }
 
 //입력받은 유저정보 + 고유한아이다(id)를 만들어서 데이터를 넣고, id를 리턴함-->token생성용
 export async function createUser(user) {
-  return getUsers()
-    .insertOne(user)
-    .then((data) => data.insertedId.toString());
+  return new User(user).save().then((data) => data.id);
 }
 
-function mapOptionalUser(user){ //null이 될수도 있는 user
-  return user ? {...user, id:user._id.toString()} : user;
+function mapOptionalUser(user) {
+  //null이 될수도 있는 user
+  return user ? { ...user, id: user._id.toString() } : user;
 }
