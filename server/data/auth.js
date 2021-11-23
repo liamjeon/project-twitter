@@ -24,5 +24,5 @@ export async function createUser(user) {
 }
 
 function mapOptionalUser(user){ //null이 될수도 있는 user
-  return user ? {...user, id:user._id} : user;
+  return user ? {...user, id:user._id.toString()} : user;
 }
