@@ -30,6 +30,7 @@ app.use((error, req, res, next) => {
 
 connectDB()
   .then(() => {
+    console.log("init");
     const server = app.listen(8080);
     initSocket(server);
   })
