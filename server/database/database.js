@@ -13,8 +13,9 @@ export async function connectDB() {
 
 //사용자에 대한 collection 전달
 export function getUsers() {
-  return db.collection("users");
+  return db.collection("users");  
 }
+
 
 //트윗에 대한 collection 전달
 export function getTweets() {
