@@ -1,34 +1,28 @@
-// abcd1234: $2b$12$G9xf8SFq3oTEgdj7ozHQ/uhDOyeQcUEDU8tnOcvpvApuadr3nE5Vm
-let users = [
-  {
-    id: "1",
-    username: "bob",
-    password: "$2b$12$G9xf8SFq3oTEgdj7ozHQ/uhDOyeQcUEDU8tnOcvpvApuadr3nE5Vm", //abcd1234
-    name: "Bob",
-    email: "bob@gmail.com",
-    url: "https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-1.png",
-  },
-  {
-    id: "2",
-    username: "liam",
-    password: "$2b$12$G9xf8SFq3oTEgdj7ozHQ/uhDOyeQcUEDU8tnOcvpvApuadr3nE5Vm", //abcd1234
-    name: "Liam",
-    email: "liam@gmail.com",
-    url: "https://widgetwhats.com/app/uploads/2019/11/free-profile-photo-whatsapp-1.png",
-  },  
-];
+import { getUsers } from "../database/database.js";
+import MongoDb from "mongodb";
 
 export async function findByUsername(username) {
-  return users.find((user) => user.username === username);
+  return getUsers()
+    .findOne({ username })
+    .then(mapOptionalUser);
 }
 
+const ObjectId = MongoDb.ObjectId;
 export async function findById(id) {
-  return users.find((user) => user.id === id);
+  return getUsers()
+    .findOne({ _id: new ObjectId(id) }) //mongodb의 _id는 obejctId형식이기 때문에 Objectid로 싸서 찾아줘야함
+    .then((data) => {
+      return mapOptionalUser(data);
+    });
 }
 
 //입력받은 유저정보 + 고유한아이다(id)를 만들어서 데이터를 넣고, id를 리턴함-->token생성용
 export async function createUser(user) {
-  const created = { ...user, id: Date.now().toString() };
-  users.push(created);
-  return created.id;
+  return getUsers()
+    .insertOne(user)
+    .then((data) => data.insertedId.toString());
+}
+
+function mapOptionalUser(user){ //null이 될수도 있는 user
+  return user ? {...user, id:user._id} : user;
 }
