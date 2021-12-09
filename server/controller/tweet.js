@@ -2,6 +2,7 @@ import express from "express";
 import * as tweetRepository from '../data/tweet.js';
 import { getSocketIO } from '../connection/socket.js';
 
+//모든 트윗 가져오기ㅇㅇㅇ
 export async function getTweets(req, res) {
   const username = req.query.username;
   const data = await (username
